@@ -5,20 +5,37 @@ This project is a React-based AI chat application that uses the Gemini AI model 
 ## Table of Contents
 
 1. [Features](#features)
-2. [Prerequisites](#prerequisites)
-3. [Installation](#installation)
-4. [Running the Application](#running-the-application)
-5. [Project Structure](#project-structure)
-6. [Components](#components)
-7. [Additional Scripts](#additional-scripts)
+2. [Technologies Used](#technologies-used)
+3. [Prerequisites](#prerequisites)
+4. [Installation](#installation)
+5. [Running the Application](#running-the-application)
+6. [Project Structure](#project-structure)
+7. [Components](#components)
+8. [Additional Scripts](#additional-scripts)
 
 ## Features
 
-- Real-time chat interface
-- AI-powered responses using Gemini AI
-- Multiple chat sessions
+- Real-time chat interface with AI-powered responses using Gemini AI
+- Multiple chat sessions management
 - Sidebar for easy navigation between chats
 - Responsive design for various screen sizes
+- Welcome screen with predefined conversation starters
+- Dynamic chat history saving and loading
+- New chat creation and deletion functionality
+- Custom styling with Tailwind CSS
+- Routing with React Router for single-page application experience
+
+## Technologies Used
+
+- React.js
+- Gemini AI API
+- React Router
+- Axios for API requests
+- Tailwind CSS for styling
+- Day.js for date formatting
+- React Icons for UI icons
+- Jest and React Testing Library for testing
+- GitHub Pages for deployment
 
 ## Prerequisites
 
@@ -30,12 +47,12 @@ Before you begin, ensure you have the following installed:
 
 1. Clone the repository:
    ```
-   git clone https://github.com/your-username/pelcro-ai-chat.git
+   git clone https://github.com/MohamedYasser9/pelcro-chatbot-assistant
    ```
 
 2. Navigate to the project directory:
    ```
-   cd pelcro-ai-chat
+   cd pelcro-chatbot-assistant
    ```
 
 3. Install the dependencies:
@@ -43,7 +60,17 @@ Before you begin, ensure you have the following installed:
    npm install
    ```
 
-4. Create a `.env` file in the root directory and add your Gemini AI API key:
+4. Install additional dependencies:
+   ```
+   npm install axios dayjs react-icons react-router-dom tailwindcss
+   ```
+
+5. Set up Tailwind CSS:
+   ```
+   npx tailwindcss init
+   ```
+
+6. Create a `.env` file in the root directory and add your Gemini AI API key:
    ```
    REACT_APP_GEMINI_API_KEY=your_api_key_here
    ```
