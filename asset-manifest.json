@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/MohamedYasser9/pelcro-chatbot-assistant/static/css/main.2a06d367.css",
+    "main.js": "/MohamedYasser9/pelcro-chatbot-assistant/static/js/main.f6610127.js",
+    "index.html": "/MohamedYasser9/pelcro-chatbot-assistant/index.html",
+    "main.2a06d367.css.map": "/MohamedYasser9/pelcro-chatbot-assistant/static/css/main.2a06d367.css.map",
+    "main.f6610127.js.map": "/MohamedYasser9/pelcro-chatbot-assistant/static/js/main.f6610127.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.2a06d367.css",
+    "static/js/main.f6610127.js"
+  ]
+}
