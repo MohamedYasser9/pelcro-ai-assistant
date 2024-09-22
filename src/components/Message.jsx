@@ -1,13 +1,29 @@
 // src/components/Message.jsx
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import dayjs from 'dayjs'; // For formatting dates
+import { generateGeminiContent } from '../gemeniService';
 
 const Message = ({ message }) => {
   const isUser = message.sender === 'user';
+  const [aiResponse, setAiResponse] = useState('');
+
+  useEffect(() => {
+    if (!isUser) {
+      generateGeminiContent(message.text)
+        .then(response => {
+          const generatedText = response.candidates[0].content.parts[0].text;
+          setAiResponse(generatedText);
+        })
+        .catch(error => {
+          console.error('Error generating AI response:', error);
+          setAiResponse('Sorry, I encountered an error while processing your request.');
+        });
+    }
+  }, [isUser, message.text]);
 
   return (
     <div className={`flex ${isUser ? 'justify-end' : 'justify-start'} mb-4`}>
-      <div className={`flex flex-col ${isUser ? 'items-end' : 'items-start'} max-w-xs lg:max-w-md`}>
+      <div className={`flex flex-col ${isUser ? 'items-end' : 'items-start'} max-w-sm lg:max-w-lg`}>
         <div 
           className={`p-4 rounded-2xl shadow-lg ${
             isUser 
@@ -17,7 +33,7 @@ const Message = ({ message }) => {
         >
           {isUser ? message.text : (
             <div>
-              <span className="font-bold text-teal-500">Pelcro AI:</span> {message.text}
+              <span className="font-bold text-teal-500">Pelcro AI:</span> {aiResponse || 'Thinking...'}
             </div>
           )}
         </div>

@@ -52,7 +52,28 @@ const ChatbotBody = ({ messages, onButtonClick,setShowWelcome,showWelcome }) => 
           </div>
         </div>
       ) : (
-        <div className="flex flex-col space-y-3">
+        <div className="flex flex-col space-y-3 h-[500px] overflow-y-auto pr-4" style={{
+          scrollbarWidth: 'thin',
+          scrollbarColor: '#14b8a6 #cffafe',
+        }}>
+          <style>
+            {`
+              .flex::-webkit-scrollbar {
+                width: 8px;
+              }
+              .flex::-webkit-scrollbar-track {
+                background: #cffafe;
+                border-radius: 4px;
+              }
+              .flex::-webkit-scrollbar-thumb {
+                background-color: #14b8a6;
+                border-radius: 4px;
+              }
+              .flex::-webkit-scrollbar-thumb:hover {
+                background-color: #0d9488;
+              }
+            `}
+          </style>
           {messages.map((msg, index) => (
             <Message key={index} message={msg} />
           ))}
