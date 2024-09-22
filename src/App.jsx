@@ -1,5 +1,6 @@
 // src/App.jsx
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import ChatbotHeader from './components/ChatbotHeader';
 import ChatbotBody from './components/ChatbotBody';
 import ChatbotInput from './components/ChatbotInput';
@@ -85,7 +86,7 @@ const App = () => {
     }
   }, []);
 
-  return (
+  const ChatInterface = () => (
     <div className="flex h-screen">
       <Sidebar
         chats={chats}
@@ -113,6 +114,14 @@ const App = () => {
         </div>
       </div>
     </div>
+  );
+
+  return (
+    <Router basename="/pelcro-chatbot-assistant">
+      <Routes>
+        <Route path="/" element={<ChatInterface />} />
+      </Routes>
+    </Router>
   );
 };
 
