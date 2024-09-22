@@ -1,41 +1,115 @@
-import React from 'react';
-import Sidebar from './components/Sidebar';
-import PelcroLogo from './components/PelcroLogo';
+// src/App.jsx
+import React, { useState, useEffect } from 'react';
+import ChatbotHeader from './components/ChatbotHeader';
+import ChatbotBody from './components/ChatbotBody';
 import ChatbotInput from './components/ChatbotInput';
-import './index.css';  // Your global CSS styles
+import Sidebar from './components/Sidebar';
+import dayjs from 'dayjs'; // For formatting dates
 
 const App = () => {
+  const [showWelcome, setShowWelcome] = useState(true);
+  const [messages, setMessages] = useState([]);
+  const [chats, setChats] = useState([]);
+  const [currentChatIndex, setCurrentChatIndex] = useState(0);
+  const [showChatbotBody, setShowChatbotBody] = useState(false);
+
+  const handleSend = (message) => {
+    const newMessage = { sender: 'user', text: message, date: new Date() };
+    const updatedMessages = [...messages, newMessage];
+    setMessages(updatedMessages);
+
+    // Simulate chatbot response
+    setTimeout(() => {
+      const response = { sender: 'chatbot', text: message, date: new Date() };
+      setMessages([...updatedMessages, response]);
+    }, 1000);
+  };
+
+  const handleNewChat = () => {
+    const newChat = { messages: [] };
+    setShowWelcome(true);
+    setChats([...chats, newChat]);
+    setCurrentChatIndex(chats.length);
+    setMessages([]);
+    setShowChatbotBody(true);
+  };
+
+  const handleSelectChat = (index) => {
+    setCurrentChatIndex(index);
+    setMessages(chats[index].messages);
+    setShowChatbotBody(true);
+  };
+
+  const handleDeleteChat = (index) => {
+    const updatedChats = chats.filter((_, i) => i !== index);
+    setChats(updatedChats);
+    if (currentChatIndex === index) {
+      setCurrentChatIndex(0);
+      setMessages(updatedChats[0]?.messages || []);
+    } else if (currentChatIndex > index) {
+      setCurrentChatIndex(currentChatIndex - 1);
+      setMessages(updatedChats[currentChatIndex - 1]?.messages || []);
+    }
+    if (updatedChats.length === 0) {
+      setShowChatbotBody(false);
+    }
+  };
+
+  const handleButtonClick = (buttonText) => {
+    const newMessage = { sender: 'user', text: buttonText, date: new Date() };
+    const updatedMessages = [...messages, newMessage];
+    setMessages(updatedMessages);
+
+    // Simulate chatbot response
+    setTimeout(() => {
+      const response = { sender: 'chatbot', text: buttonText, date: new Date() };
+      setMessages([...updatedMessages, response]);
+    }, 1000);
+  };
+
+  // Save chat messages to the sidebar when a message is sent
+  const updateChatHistory = (messages) => {
+    const updatedChats = [...chats];
+    updatedChats[currentChatIndex] = { messages };
+    setChats(updatedChats);
+  };
+
+  useEffect(() => {
+    updateChatHistory(messages);
+  }, [messages]);
+
+  useEffect(() => {
+    // Initialize with an empty chat if there are no chats
+    if (chats.length === 0) {
+      handleNewChat();
+    }
+  }, []);
+
   return (
     <div className="flex h-screen">
-      {/* Sidebar */}
-      <Sidebar />
-
-      {/* Main content area */}
-      <div className="flex-1 flex flex-col justify-center items-center bg-white">
-        {/* Pelcro logo in center */}
-        <div className="flex flex-col items-center justify-center h-2/3">
-          <PelcroLogo />
-
-          <h1 className="text-gray-700 text-xl font-semibold mt-4">Talk Data to Me</h1>
-          <p className="text-gray-500 mt-2">Choose a prompt below or write your own to start chatting with Pelcro AI</p>
-
-          {/* Action buttons */}
-          <div className="flex space-x-4 mt-4">
-            <button className="bg-gray-100 px-4 py-2 rounded-lg shadow-md hover:bg-gray-200">
-              Know more about Pelcro
-            </button>
-            <button className="bg-gray-100 px-4 py-2 rounded-lg shadow-md hover:bg-gray-200">
-             Pelcro's AI
-            </button>
-            <button className="bg-gray-100 px-4 py-2 rounded-lg shadow-md hover:bg-gray-200">
-             Why Pelcro?
-            </button>
+      <Sidebar
+        chats={chats}
+        onSelectChat={handleSelectChat}
+        onNewChat={handleNewChat}
+        onDeleteChat={handleDeleteChat}
+      />
+      <div className="flex-1 flex flex-col bg-gradient-to-r from-teal-50 via-cyan-100 to-teal-50">
+        <ChatbotHeader onNewChat={handleNewChat} />
+        <div className="flex-1 flex items-center justify-center p-6">
+          <div className="w-full max-w-2xl flex flex-col h-full bg-transparent">
+            {showChatbotBody && (
+              <div className="flex-1 overflow-y-auto mb-4  bg-transparent">
+                <ChatbotBody messages={messages} setShowWelcome={setShowWelcome} showWelcome={showWelcome} onButtonClick={handleButtonClick} />
+              </div>
+            )}
+            <div className=" bg-transparent rounded-full shadow-lg hover:shadow-xl transition-shadow duration-300">
+              <ChatbotInput 
+                onSend={handleSend} 
+                className="w-full py-3 px-6 text-teal-800 placeholder-teal-400 focus:outline-none focus:ring-2 focus:ring-teal-400 focus:border-transparent"
+                placeholder="Type your message here..."
+              />
+            </div>
           </div>
-        </div>
-
-        {/* Chatbot Input Area */}
-        <div className="w-full px-8 py-4 bg-gray-50 border-t border-gray-200">
-          <ChatbotInput />
         </div>
       </div>
     </div>

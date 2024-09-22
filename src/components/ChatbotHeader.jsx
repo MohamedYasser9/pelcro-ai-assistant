@@ -1,11 +1,30 @@
+// src/components/ChatbotHeader.jsx
 import React from 'react';
+import PelcroLogo from './PelcroLogo';
 
-const ChatbotHeader = () => {
+const ChatbotHeader = ({ onNewChat }) => {
   return (
-    <div className="bg-white p-4 flex items-center justify-between border-b border-gray-300">
-      <h1 className="text-black text-lg font-bold">Pelcro Chatbot</h1>
-      <img src="https://static.wixstatic.com/media/6d3dc4_e0f1cc6e5fb642c5b5abbbcc63d0f32b~mv2.png/v1/fill/w_129,h_31,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/Pelcro%20logo-01_edited.png" alt="Pelcro Logo" className="w-15 " />
-    </div>
+    <header className="bg-white p-4 shadow-lg flex items-center justify-between">
+      <div className="flex items-center">
+        <PelcroLogo className="h-8 w-auto" />
+        <div className="text-2xl font-bold text-teal-600 ml-3 tracking-wide">AI Assistant</div>
+      </div>
+      <div className="flex items-center space-x-3">
+        <button 
+          onClick={onNewChat}
+          className="bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-white p-2 rounded-full transition duration-300 ease-in-out shadow-md hover:shadow-lg transform hover:scale-105"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 2v20M2 12h20" />
+          </svg>
+        </button>
+        <button className="bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-white p-2 rounded-full transition duration-300 ease-in-out shadow-md hover:shadow-lg transform hover:scale-105">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+            <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
+          </svg>
+        </button>
+      </div>
+    </header>
   );
 };
 

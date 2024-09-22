@@ -1,4 +1,39 @@
+/* src/index.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* Custom styles */
+html, body, #root {
+  height: 100%;
+  margin: 0;
+}
+
+.flex-1 {
+  display: flex;
+  flex-direction: column;
+}
+
+.bg-gray-100 {
+  background-color: #f7f7f7;
+}
+
+.bg-blue-500 {
+  background-color: #3b82f6;
+}
+
+.bg-gray-200 {
+  background-color: #e5e7eb;
+}
+
+.text-white {
+  color: #ffffff;
+}
+
+.p-3 {
+  padding: 0.75rem;
+}
+
+.rounded-lg {
+  border-radius: 0.5rem;
+}
