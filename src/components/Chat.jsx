@@ -12,7 +12,7 @@ const Chat = () => {
           <Message key={index} message={message} />
         ))
       ) : (
-        <div className="text-gray-500 text-center">Start a new chat!</div>
+        <div className="text-gray-500 text-center">Start new chat!</div>
       )}
     </div>
   );
