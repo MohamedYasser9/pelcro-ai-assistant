@@ -1,4 +1,4 @@
-// src/components/ChatbotInput.jsx
+
 import React, { useState } from 'react';
 
 const ChatbotInput = ({ onSend }) => {

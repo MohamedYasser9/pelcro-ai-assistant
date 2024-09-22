@@ -1,6 +1,6 @@
-// src/components/Sidebar.jsx
+
 import React from 'react';
-import dayjs from 'dayjs'; // For formatting dates
+import dayjs from 'dayjs'; 
 
 const Sidebar = ({ chats, onSelectChat, onNewChat, onDeleteChat }) => {
   const handleNewChat = () => {

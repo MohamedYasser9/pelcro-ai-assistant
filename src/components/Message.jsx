@@ -1,6 +1,6 @@
-// src/components/Message.jsx
+
 import React, { useState, useEffect } from 'react';
-import dayjs from 'dayjs'; // For formatting dates
+import dayjs from 'dayjs'; 
 import { generateGeminiContent } from '../gemeniService';
 
 const Message = ({ message }) => {

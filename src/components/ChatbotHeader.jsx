@@ -1,4 +1,4 @@
-// src/components/ChatbotHeader.jsx
+
 import React from 'react';
 import PelcroLogo from './PelcroLogo';
 
